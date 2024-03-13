@@ -1,0 +1,5 @@
+name "optibrev"
+description "Small library implementing Option type functionality"
+authors "Oleg Bakharev" "LightHouse Software"
+copyright "Copyright © 2024, Oleg Bakharev, LightHouse Software"
+license "LGPL-2.0-only"

@@ -1,0 +1,16 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/optibrev
+optibrev.so
+optibrev.dylib
+optibrev.dll
+optibrev.a
+optibrev.lib
+optibrev-test-*
+*.exe
+*.pdb
+*.o
+*.obj
+*.lst
