@@ -1,3 +1,15 @@
+// Written in the D programming language.
+
+/**
+Optibrev is a minimalistic and powerful D library for managing optional values. 
+ 
+It gives you a flexible way to handle `null` or missing values without writing excessive code. It supports the fundamental monadic operations such as `map`, enabling you to transform your data in a functional manner. 
+Alongside, it provides methods like `unwrap`, `isNone`, `isSome`, and `orElse` for easy extraction and error handling. The main data structure in Optibrev is `Option`, which encapsulates an optional value. 
+
+Copyright: LightHouse Software, 2024
+Authors:   Oleg Bakharev,
+		   Emily Tiernan
+*/
 module optibrev;
 
 // Option type
