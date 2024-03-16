@@ -34,35 +34,117 @@ struct Option(T)
 		}
 	}
 	
-	// is None ?
+	
+	/**
+	Сhecks if Option has None (i.e empty, null etc.) value
+	Returns:
+	Returns true if the option is None, false otherwise.
+    
+    Typical usage:
+    ----
+    import std.stdio : writeln;
+    
+    Option!int value;
+    writeln(value.isNone) // true
+    ----
+    */
 	bool isNone() {
 		return type == OptionType.NONE;
 	}
 	
-	// is Some ?
+	
+	/**
+	Сhecks if Option has value (i.e empty, null etc.) value
+	Returns:
+	Returns true if the option holds value, false otherwise.
+    
+    Typical usage:
+    ----
+    import std.stdio : writeln;
+    
+    Option!int value;
+    value.Some(10)
+    writeln(value.isSome) // true
+    ----
+    */
 	bool isSome() {
 		return type == OptionType.SOME;
 	}
 	
-	// return Option if Some or return defaultValue otherwise
+	
+	/**
+	A method that gets the value if the Option is Some, or return defaultValue otherwise.
+	Returns:
+	Returns the value in Option or default value.
+    
+    Typical usage:
+    ----
+    Option!int x;
+    writeln(x.orElse());  // Prints: 10
+    ----
+    */
 	T orElse(T defaultValue)
 	{
 		return (type == OptionType.NONE) ? defaultValue : value;
 	}
 	
-	// None type
+	
+	/**
+	Сreate None (i.e empty, null etc.) value, packed in Option!T
+	Returns:
+	Returns Option!T with None value for given type T.
+    
+    Typical usage:
+    ----
+    import std.stdio : writeln;
+    
+    // without using None method gives default None value
+    Option!int value;
+    // ditto
+    value = value.None();
+    ----
+    */
 	Option!T None()
 	{
 		return Option!T(OptionType.NONE);
 	}
 	
-	// Some value
+
+	/**
+	Сreate non-null or non-empty value, packed in Option!T
+	Returns:
+	Returns Option!T with packed value for given type T.
+    
+    Typical usage:
+    ----
+    import std.stdio : writeln;
+    
+    // without using None method gives default None value
+    Option!int value;
+    // set value in Option!int
+    value = value.Some(5);
+    ----
+    */
 	Option!T Some(T value)
 	{
 		return Option!T(OptionType.SOME, value);
 	}
 	
-	// string representation
+
+	/**
+	A string representation of a Option type.
+	The toString() method output Option type as a string in the following format: Some(value) or None()
+	Returns:
+	String representation for Option type.
+    
+    Typical usage:
+    ----
+    import std.stdio : writeln;
+    
+    Option!string s;
+	s.writeln; // "None"
+    ----
+    */
     string toString() const 
 	{
 		import std.conv : to;
@@ -71,7 +153,19 @@ struct Option(T)
 		return (type == OptionType.NONE) ? "None" : format("Some(%s)", to!string(value));
 	}
     
-    // unwrap value
+
+	/**
+	A method to unwrap the value of the Option.
+	Returns:
+	Returns the value stored in Option if Option itself does not consider None.
+    
+    Typical usage:
+    ----
+    Option!int x;
+    x = x.Some(10);
+    writeln(x.unwrap());  // Prints: 10
+    ----
+    */
     T unwrap() const 
     {
         if (type == OptionType.SOME)
