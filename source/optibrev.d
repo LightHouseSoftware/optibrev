@@ -69,4 +69,19 @@ struct Option(T)
         
         throw new Exception("Can't unwrap None"); 
     }
+    
+    Option!U map(U)(U delegate(T) func) 
+	{ 
+		Option!U tmp;
+		
+	    if (type == OptionType.NONE) 
+	    {
+	        tmp = tmp.None(); 
+	    } 
+	    else 
+	    {
+	        tmp = tmp.Some(func(value)); 
+	    } 
+	    return tmp; 
+	}    
 }
